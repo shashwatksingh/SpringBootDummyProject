@@ -1,6 +1,7 @@
 package com.shashwatksingh.project1.service;
 
 import com.shashwatksingh.project1.entity.Department;
+import com.shashwatksingh.project1.error.DepartmentNotFoundException;
 import com.shashwatksingh.project1.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,13 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public Optional<Department> fetchDepartmentById(Long departmentId) {
-        return departmentRepository.findById(departmentId);
+    public Department fetchDepartmentById(Long departmentId) throws DepartmentNotFoundException {
+        Optional<Department> depDB = departmentRepository.findById(departmentId);
+        if(!depDB.isPresent()) {
+            System.out.println("Throwing Exception");
+            throw new DepartmentNotFoundException("Department not found");
+        }
+        return depDB.get();
     }
 
     @Override
@@ -35,8 +41,8 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public Department updateDepartment(Department department, Long departmentId) {
-        Department depDB = fetchDepartmentById(departmentId).get();
+    public Department updateDepartment(Department department, Long departmentId) throws DepartmentNotFoundException {
+        Department depDB = fetchDepartmentById(departmentId);
         if(Objects.nonNull(department.getDepartmentName()) && !"".equalsIgnoreCase(department.getDepartmentName())) {
             depDB.setDepartmentName(department.getDepartmentName());
         }
