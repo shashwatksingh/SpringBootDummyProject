@@ -8,7 +8,7 @@ public class Home {
     @GetMapping(path = "/")
 //    @RequestMapping(path = "/", method = RequestMethod.GET)
     public String helloWorld() {
-        return "Hello World!";
+        return "Hello World with an update!";
     }
 
 }
