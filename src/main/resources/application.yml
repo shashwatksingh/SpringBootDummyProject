@@ -1,0 +1,48 @@
+server:
+  port: 4314
+
+spring:
+  profiles:
+    active: dev
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: sa
+    url: jdbc:mysql://localhost:3306/spring_demo_dev
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+
+---
+
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: sa
+    url: jdbc:mysql://localhost:3306/spring_demo_prod
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+
+---
+
+spring:
+  profiles: general
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: sa
+    url: jdbc:mysql://localhost:3306/spring_demo
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
