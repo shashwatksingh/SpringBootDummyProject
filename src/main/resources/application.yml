@@ -51,3 +51,4 @@ management:
     web:
       exposure:
         include: "*"
+        exclude: "env, beans"
